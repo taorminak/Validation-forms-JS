@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Опросник владельцев котов</title>
+  </head>
+  <body>
+    <h1>Опросник</h1>
+    <form>
+      <div>
+        <label for="nickname">Кличка питомца:</label>
+        <input
+          type="text"
+          id="nickname"
+          minlength="2"
+          maxlength="10"
+          required
+        />* От 2 до 10 букв
+      </div>
+      <div>
+        <label for="ownername">Имя владельца:</label>
+        <input
+          type="tel"
+          id="ownername"
+          minlength="3"
+          maxlength="40"
+          required
+        />* От 3 до 40 букв
+      </div>
+      <div>
+        <label for="phone">Телефон владельца:</label>
+        <input
+          type="number"
+          id="phone"
+          minlength="6"
+          maxlength="12"
+          required
+        />* Только числа
+      </div>
+      <div>
+        <div>Выберите породу:</div>
+        <select required>
+          <option value="Maine Coon">Мейн-кун</option>
+          <option value="Persian">Персидская</option>
+          <option value="Siamese">Сиамская</option>
+          <option value="Siberian">Сибирская</option>
+          <option value="Scottish">Шотландская</option>
+          <option value="Сanadian sphynx">Канадский сфинкс</option>
+          <option value="Bengal">Бенгальская</option>
+          <option value="British">Британская</option>
+          <option value="Thai">Тайская</option>
+          <option value="Other">Другая</option>
+        </select>
+      </div>
+      <div>
+        <div>Тип корма:</div>
+        Влажный
+        <input
+          type="checkbox"
+          name="feed_type"
+          id="wet"
+          value="wet"
+        />Сухой<input
+          type="checkbox"
+          name="feed_type"
+          value="dry"
+          id="dry"
+        />Натуральный<input
+          type="checkbox"
+          name="feed_type"
+          id="natural"
+          value="natural"
+        />
+      </div>
+      <div>
+        <div>Пол животного:*</div>
+        Самец
+        <input type="radio" required name="sex" value="male" /><br />Самка<input
+          type="radio"
+          required
+          name="sex"
+          value="female"
+        />
+      </div>
+      <div>
+        <div>Оставьте ваш комментарий:</div>
+        <textarea rows="10"></textarea>
+      </div>
+      <div>
+        <label for="picture">Фото питомца:</label>
+        <input type="file" id="picture" required />
+      </div>
+      <div><button>Сохранить</button></div>
+      <div><button id="myBtn">OK</button></div>
+    </form>
+
+    <style>
+      body {
+        display: inline-block;
+        background-color: beige;
+        font-size: 14pt;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      }
+
+      input:valid {
+        border: 1px solid lightgreen;
+      }
+    </style>
+    <script>
+      class Cat {
+        constructor(nickname, ownername, phone, breed, feed, sex) {
+          this.nickname = nickname;
+          this.ownername = ownername;
+          this.phone = phone;
+          this.breed = breed;
+          this.feed = feed;
+          this.sex = sex;
+        }
+      }
+
+      const button = document.getElementById("myBtn");
+      button.addEventListener("click", myFunction);
+
+      function myFunction(e) {
+        e.preventDefault();
+        const nickname = document.querySelector("#nickname").value;
+        const ownername = document.querySelector("#ownername").value;
+        const phone = document.querySelector("#phone").value;
+        const breed = document.querySelector("select").value;
+        const feedTypes = Array.from(
+          document.querySelectorAll('input[name="feed_type"]:checked')
+        );
+        const feed = feedTypes.map((item) => item.value);
+        const sex = document.querySelector('input[name="sex"]:checked').value;
+
+        const cat1 = new Cat(nickname, ownername, phone, breed, feed, sex);
+        console.log(cat1);
+      }
+    </script>
+  </body>
+</html>
